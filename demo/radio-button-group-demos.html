@@ -8,73 +8,141 @@
     </style>
 
 
-    <h3>Radio Group</h3>
-    <vaadin-demo-snippet id='radio-button-group-demos-radio-group'>
+    <h3>Radio Group with Iron Form 1</h3>
+    <vaadin-demo-snippet id='radio-button-group-demos-radio-group-with-iron-form-1'>
       <template preserve-content>
-        <vaadin-radio-button-group name="radio-group" value="bar">
-          <vaadin-radio-button value="foo">Foo</vaadin-radio-button>
-          <vaadin-radio-button value="bar">Bar</vaadin-radio-button>
-          <vaadin-radio-button value="baz">Baz</vaadin-radio-button>
-        </vaadin-radio-button-group>
-      </template>
-    </vaadin-demo-snippet>
+        <div style="display: flex;">
+          <iron-form>
+            <form>
+              <vaadin-radio-button-group name="radio-group" required>
+                <vaadin-radio-button value="foo">1</vaadin-radio-button>
+                <vaadin-radio-button value="bar">2</vaadin-radio-button>
+                <vaadin-radio-button value="baz">3</vaadin-radio-button>
+                <vaadin-radio-button value="quz">4</vaadin-radio-button>
+              </vaadin-radio-button-group>
+            </form>
+            <div class="output"></div>
+          </iron-form>
 
-    <h3>Radio Group with Custom Tabindex</h3>
-    <vaadin-demo-snippet id='radio-button-group-demos-radio-group-custom-tabindex'>
-      <template preserve-content>
-        <vaadin-radio-button-group name="radio-group">
-          <vaadin-radio-button tabindex="1">1</vaadin-radio-button>
-          <vaadin-radio-button tabindex="3">2</vaadin-radio-button>
-          <vaadin-radio-button tabindex="2">3</vaadin-radio-button>
-        </vaadin-radio-button-group>
-      </template>
-    </vaadin-demo-snippet>
-
-
-    <h3>Radio Group Disabled</h3>
-    <vaadin-demo-snippet id='radio-button-group-demos-radio-group-disabled'>
-      <template preserve-content>
-        <vaadin-radio-button-group name="radio-group" disabled>
-          <vaadin-radio-button>1</vaadin-radio-button>
-          <vaadin-radio-button>2</vaadin-radio-button>
-          <vaadin-radio-button>3</vaadin-radio-button>
-          <vaadin-radio-button>4</vaadin-radio-button>
-        </vaadin-radio-button-group>
-      </template>
-    </vaadin-demo-snippet>
-
-
-    <h3>Radio Group with Iron Form</h3>
-    <vaadin-demo-snippet id='radio-button-group-demos-radio-group-with-iron-form'>
-      <template preserve-content>
-        <iron-form id="test-form">
-          <form>
-            <vaadin-radio-button-group name="radio-group" required>
-              <vaadin-radio-button value="first">1</vaadin-radio-button>
-              <vaadin-radio-button value="second">2</vaadin-radio-button>
-              <vaadin-radio-button value="third">3</vaadin-radio-button>
-              <vaadin-radio-button value="fourth">4</vaadin-radio-button>
-            </vaadin-radio-button-group>
-            <vaadin-button id="submit-button">Submit</vaadin-button>
-          </form>
-          <div class="output"></div>
-        </iron-form>
+          <iron-form>
+            <form>
+              <paper-radio-group name="paper-group" required>
+                <paper-radio-button value="foo">1</paper-radio-button>
+                <paper-radio-button value="bar">2</paper-radio-button>
+                <paper-radio-button value="baz">3</paper-radio-button>
+                <paper-radio-button value="qux">4</paper-radio-button>
+              </paper-radio-group>
+            </form>
+            <div class="output"></div>
+          </iron-form>
+        </div>
+        <vaadin-button>Sumbit</vaadin-button>
         <script>
-          window.addDemoReadyListener('#radio-button-group-demos-radio-group-with-iron-form', function(document) {
-            var testForm = document.getElementById('test-form');
-            var submitButton = document.getElementById('submit-button');
+          window.addDemoReadyListener('#radio-button-group-demos-radio-group-with-iron-form-1', function(document) {
+            const vf = document.querySelector('iron-form');
+            const pf = vf.nextElementSibling;
+            const submitButton = document.querySelector('vaadin-button');
 
             submitButton.addEventListener('click', function(event) {
-              testForm.submit();
-            });
-
-            testForm.addEventListener('iron-form-submit', function(event) {
-              this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
+              [vf, pf].forEach(f => {
+                f.querySelector('.output').innerHTML = JSON.stringify(f.serializeForm());
+              });
             });
           });
         </script>
       </template>
     </vaadin-demo-snippet>
+
+    <h3>Radio Group with Iron Form 2</h3>
+    <vaadin-demo-snippet id='radio-button-group-demos-radio-group-with-iron-form-2'>
+      <template preserve-content>
+        <div style="display: flex;">
+          <iron-form>
+            <form>
+              <vaadin-radio-button-group name="radio-group" required>
+                <vaadin-radio-button name="foo">1</vaadin-radio-button>
+                <vaadin-radio-button name="bar">2</vaadin-radio-button>
+                <vaadin-radio-button name="baz">3</vaadin-radio-button>
+                <vaadin-radio-button name="quz">4</vaadin-radio-button>
+              </vaadin-radio-button-group>
+            </form>
+            <div class="output"></div>
+          </iron-form>
+
+          <iron-form>
+            <form>
+              <paper-radio-group name="paper-group" required>
+                <paper-radio-button name="foo">1</paper-radio-button>
+                <paper-radio-button name="bar">2</paper-radio-button>
+                <paper-radio-button name="baz">3</paper-radio-button>
+                <paper-radio-button name="qux">4</paper-radio-button>
+              </paper-radio-group>
+            </form>
+            <div class="output"></div>
+          </iron-form>
+        </div>
+        <vaadin-button>Sumbit</vaadin-button>
+        <script>
+          window.addDemoReadyListener('#radio-button-group-demos-radio-group-with-iron-form-2', function(document) {
+            const vf = document.querySelector('iron-form');
+            const pf = vf.nextElementSibling;
+            const submitButton = document.querySelector('vaadin-button');
+
+            submitButton.addEventListener('click', function(event) {
+              [vf, pf].forEach(f => {
+                f.querySelector('.output').innerHTML = JSON.stringify(f.serializeForm());
+              });
+            });
+          });
+        </script>
+      </template>
+    </vaadin-demo-snippet>
+
+    <h3>Radio Group with Iron Form 3</h3>
+    <vaadin-demo-snippet id='radio-button-group-demos-radio-group-with-iron-form-3'>
+      <template preserve-content>
+        <div style="display: flex;">
+          <iron-form>
+            <form>
+              <vaadin-radio-button-group name="radio-group" required>
+                <vaadin-radio-button name="first" value="foo">1</vaadin-radio-button>
+                <vaadin-radio-button name="second" value="bar">2</vaadin-radio-button>
+                <vaadin-radio-button name="third" value="baz">3</vaadin-radio-button>
+                <vaadin-radio-button name="fourth" value="quz">4</vaadin-radio-button>
+              </vaadin-radio-button-group>
+            </form>
+            <div class="output"></div>
+          </iron-form>
+
+          <iron-form>
+            <form>
+              <paper-radio-group name="paper-group" required>
+                <paper-radio-button name="first" value="foo">1</paper-radio-button>
+                <paper-radio-button name="second" value="bar">2</paper-radio-button>
+                <paper-radio-button name="third" value="baz">3</paper-radio-button>
+                <paper-radio-button name="fourth" value="qux">4</paper-radio-button>
+              </paper-radio-group>
+            </form>
+            <div class="output"></div>
+          </iron-form>
+        </div>
+        <vaadin-button>Sumbit</vaadin-button>
+        <script>
+          window.addDemoReadyListener('#radio-button-group-demos-radio-group-with-iron-form-3', function(document) {
+            const vf = document.querySelector('iron-form');
+            const pf = vf.nextElementSibling;
+            const submitButton = document.querySelector('vaadin-button');
+
+            submitButton.addEventListener('click', function(event) {
+              [vf, pf].forEach(f => {
+                f.querySelector('.output').innerHTML = JSON.stringify(f.serializeForm());
+              });
+            });
+          });
+        </script>
+      </template>
+    </vaadin-demo-snippet>
+
 
   </div>
   </template>
